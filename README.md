@@ -61,23 +61,6 @@ Our project involved:
 
 ---
 
-## ⚙️ Working Principle
-
-The converter works in two phases:
-
-1. **Switch ON:** Current flows through the inductor, storing energy in its magnetic field.  
-2. **Switch OFF:** Inductor releases stored energy, boosting the voltage across the load.
-
-The output voltage \( V_{out} \) is given by:
-
-\[
-V_{out} = \frac{V_{in}}{1 - D}
-\]
-
-Where **D** is the duty cycle of the PWM signal.
-
----
-
 ## 📊 Results & Observations
 
 - **Boosted Output:** Successfully stepped up input voltage (e.g., 5V → ~9V at 60% duty cycle).  
