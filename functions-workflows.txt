@@ -1,0 +1,41 @@
+_____________________________________________________________________
+
+------------REGULATE(Vin, Vout, Iout)--------------------------------
+ ┌───────────────────────────────────────────────┐
+ │ Check Mode:                                  │                    
+ │  IF (Vout_max < Vin) → BUCK MODE             │
+ │  ELSE → BOOST MODE                           │
+ └───────────────────────────────────────────────┘
+
+ • BUCK MODE:
+   - Turn OFF Boost PWM
+   - If (Iout within limits & Vout < Vout_max):
+        Increase duty_cycle (+2)
+   - Else if (Iout > Iout_max OR Vout > Vout_max):
+        Decrease duty_cycle (-2)
+   - Apply PWM as (255 - duty_cycle) on buck_pin
+
+ • BOOST MODE:
+   - Turn OFF Buck PWM
+   - If (Iout < Iout_max & Vout < Vout_max):
+        Increase duty_cycle (+2)
+   - Else if (Iout > Iout_max OR Vout > Vout_max):
+        Decrease duty_cycle (-2)
+   - Apply PWM directly as (duty_cycle) on boost_pin
+______________________________________________________________________
+
+------------AUTO_CUT_OFF(Vin, Vout, Iout)-----------------------------
+ IF ((Vout ≥ Vout_max AND Iout < Iout_min) OR (Vin < Vin_threshold)):
+     → Shut down both PWM outputs
+     → Print "Charging Completed."
+     → Delay 64 seconds (pause system)
+______________________________________________________________________
+
+------------SOFT_START()----------------------------------------------
+ IF (Vout_sense ≤ Vout_min):
+     → Run regulate() to gradually raise duty_cycle
+     → Print debug info
+     → Delay 64 seconds (safety start delay)
+ ELSE:
+     → Set startup = false (enter normal mode)
+______________________________________________________________________
