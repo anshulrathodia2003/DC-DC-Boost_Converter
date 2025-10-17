@@ -34,7 +34,7 @@ This project was executed in two distinct phases, moving from analog open-loop c
 
 ### Phase 3: MATLAB Validation
 
-* **Simulation:** Simulated the Arduino-based control loop and converter circuit within **MATLAB Simulink**.
+* **Simulation:** Simulated the Arduino-based control loop and converter circuit within **MATLAB**.
 
 ---
 ## ⚙️ Key Features
