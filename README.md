@@ -1,84 +1,70 @@
-# ⚡ DC-DC Boost Converter
+# ⚡ DC–DC Boost Converter
 
-**Course Project:** EE256  
-**Under:** Dr. Vijay A. S.  
-**Duration:** Mar 2024 – Apr 2024  
+**Course Project:** EE256 – Power Electronics
+**Under:** Dr. Vijay A. S.
+**Duration:** Mar 2024 – Apr 2024
 
-A hardware and software implementation of a **DC-DC Boost Converter** designed as part of the EE256 course project.  
-This project demonstrates the design, implementation, and analysis of a boost converter in both **hardware (breadboard prototype)** and **software (MATLAB Simulink)** domains.
+A hybrid **hardware–software implementation of a DC–DC Boost Converter**, developed as part of the EE256 Power Electronics course.
 
+The project demonstrates analog and digital control techniques for voltage regulation and compares experimental results with **MATLAB simulations**.
 ---
 
 ## 📌 Project Overview
 
-The DC-DC Boost Converter is a type of **switch-mode power supply** that steps up (boosts) a lower input DC voltage to a higher output DC voltage.  
-Our project involved:
+The **DC–DC Boost Converter** steps up a low-level DC input voltage to a higher output voltage using switch-mode control.
 
-- Implementing the boost converter on a breadboard.
-- Designing and building a **Pulse Width Modulator (PWM)** using the TL494 IC.
-- Simulating and analyzing the converter in **MATLAB Simulink**.
-- Studying the converter behavior under **Continuous Conduction Mode (CCM)** and **Discontinuous Conduction Mode (DCM)**.
+This project was executed in two distinct phases, moving from analog open-loop control to a fully digital closed-loop system:
 
 ---
 
-## ⚡ Key Features
+### Phase 1: Hardware PWM Control (TL494 IC)
 
-- **Hardware Implementation**
-  - Breadboard prototype using inductor, diode, MOSFET, capacitor, and load resistor.
-  - PWM generation using **TL494 IC** for gate control.
-  - Measurement of input/output voltages and duty cycle control.
-
-- **Software Simulation**
-  - MATLAB Simulink model replicating the hardware circuit.
-  - Parameter tuning for duty cycle, switching frequency, and load.
-  - Observation of inductor current, output voltage ripple, and efficiency.
-
-- **Waveform Analysis**
-  - Compared simulation and experimental results.
-  - Analyzed waveforms for both CCM and DCM modes.
+* **Implementation:** Implemented the boost converter on a breadboard using a **TL494 PWM controller** with a manually adjustable duty cycle.
+* **Analysis:** Analyzed converter behavior in **Continuous Conduction Mode (CCM)** and **Discontinuous Conduction Mode (DCM)**.
 
 ---
 
-## 🛠️ Hardware Components Used
+### Phase 2: Digital Closed-Loop Control (Arduino Uno)
 
-| Component           | Description / Rating |
-|--------------------|---------------------|
-| **TL494 IC**       | PWM controller for gate drive |
-| **Inductor (L)**   | 220 µH (approx.) |
-| **MOSFET**         | IRF540N (N-channel) |
-| **Diode**          | Schottky Diode (Fast Recovery) |
-| **Capacitor (C)**  | 470 µF, 25V |
-| **Load Resistor**  | 10 Ω |
-| **Power Supply**   | 5V–12V DC |
+* **Closed-Loop System:** Replaced the analog PWM generator with an **Arduino Uno**, implementing closed-loop voltage regulation via **ADC feedback** and software-controlled PWM.
+* **Protection Logic:** Added **auto-cutoff** and protection logic for under-voltage and charge-completion conditions.
 
 ---
 
-## 🖥️ Software Used
+### Phase 3: MATLAB Validation
 
-- **MATLAB Simulink** – for converter modeling and waveform analysis  
-- **LTSpice / Multisim (Optional)** – for pre-verification of design parameters  
-- **Digital Oscilloscope** – for waveform observation  
+* **Simulation:** Simulated the Arduino-based control loop and converter circuit within **MATLAB Simulink**.
+* **Verification:** Validated the output voltage regulation and transient response against experimental data collected from the hardware prototype.
+
+---
+## ⚙️ Key Features
+
+The implemented DC–DC Boost Converter includes the following core functionalities:
+
+* **Closed-Loop Regulation:** Achieves precise output voltage control through **real-time feedback** of the output voltage, which is used to dynamically adjust the **PWM duty cycle** via the Arduino Uno.
+* **Mode Adaptation:** Features advanced logic for **automatic switching** between buck and boost operational modes, adapting based on the instantaneous input and desired output voltage levels.
+* **Safety Logic:** Enhanced system safety via **auto-cutoff** functionality, triggered by either low input voltage detection or the detection of charge-completion in the load (e.g., battery charging).
+* **MATLAB Verification:** The simulation model in MATLAB confirmed **consistent regulation characteristics** and a stable **transient response** that accurately matched the performance observed on the physical hardware.
+
+---
+## 🧰 Tools & Technologies
+Hardware: **TL494 PWM IC**, **Arduino Uno**, **MOSFET Driver**, **Inductor**, **Diode**, **Capacitor**
+Software: **Arduino IDE (C++)**, **MATLAB Simulink**
+Key Concepts: **PWM Control**, **ADC Feedback**, **Closed-Loop Regulation**, **CCM/DCM Analysis**
 
 ---
 
 ## 📊 Results & Observations
 
-- **Boosted Output:** Successfully stepped up input voltage (e.g., 5V → ~9V at 60% duty cycle).  
-- **Waveform Validation:** Observed expected current rise during switch ON and voltage boost during switch OFF.  
-- **CCM vs DCM:** Verified theoretical predictions — CCM showed continuous current flow, whereas DCM exhibited zero current intervals.  
+The project successfully demonstrated the core functionalities across both hardware implementations and simulation environments:
+
+* **TL494 Implementation:** Successfully verified the expected **CCM (Continuous Conduction Mode) and DCM (Discontinuous Conduction Mode) waveforms** and confirmed the theoretical voltage-boost relationship with respect to the manually adjusted **duty cycle**.
+* **Arduino Implementation:** Achieved **automatic voltage regulation** for the output, maintaining the voltage reliably within the set operational thresholds (e.g., **11 V–13 V range**).
+* **MATLAB Simulation:** The simulated output voltage and transient behavior (such as startup and response to load changes) **closely matched** the experimental data and performance recorded during the Arduino hardware testing.
 
 ---
 
-## 📈 Future Improvements
+## 🚀 Future Work
 
-- Replace TL494 with a microcontroller-based PWM generator (Arduino / STM32) for better flexibility.
-- Improve efficiency using low-RDS(on) MOSFETs.
-- Develop a PCB for a more robust and compact prototype.
-
----
-
-## 📜 License
-
-This project was created as part of an academic course and is intended for educational purposes.  
-Feel free to use and modify it for learning and non-commercial applications.
-
+* **Advanced Control:** Implement full **PID (Proportional-Integral-Derivative) digital control** to achieve significantly finer and more stable output voltage regulation compared to the current implementation.
+* **Performance Scaling:** Port the existing control design and code to **higher-performance microcontrollers** (such as the **ESP32** or **STM32**) to leverage faster processing speeds and dedicated PWM hardware for more efficient switching and complex control algorithms.
