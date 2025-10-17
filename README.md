@@ -6,7 +6,8 @@
 
 A hybrid **hardware–software implementation of a DC–DC Boost Converter**, developed as part of the EE256 Power Electronics course.
 
-The project demonstrates analog and digital control techniques for voltage regulation and compares experimental results with **MATLAB simulations**.
+The project demonstrates analog and digital control techniques for voltage regulation and compares experimental results with **MATLAB simulations**. 
+
 ---
 
 ## 📌 Project Overview
@@ -34,7 +35,6 @@ This project was executed in two distinct phases, moving from analog open-loop c
 ### Phase 3: MATLAB Validation
 
 * **Simulation:** Simulated the Arduino-based control loop and converter circuit within **MATLAB Simulink**.
-* **Verification:** Validated the output voltage regulation and transient response against experimental data collected from the hardware prototype.
 
 ---
 ## ⚙️ Key Features
@@ -44,12 +44,11 @@ The implemented DC–DC Boost Converter includes the following core functionalit
 * **Closed-Loop Regulation:** Achieves precise output voltage control through **real-time feedback** of the output voltage, which is used to dynamically adjust the **PWM duty cycle** via the Arduino Uno.
 * **Mode Adaptation:** Features advanced logic for **automatic switching** between buck and boost operational modes, adapting based on the instantaneous input and desired output voltage levels.
 * **Safety Logic:** Enhanced system safety via **auto-cutoff** functionality, triggered by either low input voltage detection or the detection of charge-completion in the load (e.g., battery charging).
-* **MATLAB Verification:** The simulation model in MATLAB confirmed **consistent regulation characteristics** and a stable **transient response** that accurately matched the performance observed on the physical hardware.
 
 ---
 ## 🧰 Tools & Technologies
 Hardware: **TL494 PWM IC**, **Arduino Uno**, **MOSFET Driver**, **Inductor**, **Diode**, **Capacitor**
-Software: **Arduino IDE (C++)**, **MATLAB Simulink**
+Software: **Arduino IDE (C++)**, **MATLAB**
 Key Concepts: **PWM Control**, **ADC Feedback**, **Closed-Loop Regulation**, **CCM/DCM Analysis**
 
 ---
@@ -60,7 +59,6 @@ The project successfully demonstrated the core functionalities across both hardw
 
 * **TL494 Implementation:** Successfully verified the expected **CCM (Continuous Conduction Mode) and DCM (Discontinuous Conduction Mode) waveforms** and confirmed the theoretical voltage-boost relationship with respect to the manually adjusted **duty cycle**.
 * **Arduino Implementation:** Achieved **automatic voltage regulation** for the output, maintaining the voltage reliably within the set operational thresholds (e.g., **11 V–13 V range**).
-* **MATLAB Simulation:** The simulated output voltage and transient behavior (such as startup and response to load changes) **closely matched** the experimental data and performance recorded during the Arduino hardware testing.
 
 ---
 
